@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>C&#43;&#43; Reference - The PGM-index</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="https://pgm.di.unipi.it/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.f020f3522cfa392c183955777e7677347a932a7ce488c2bdadec739ff5de4af7.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://pgm.di.unipi.it">The PGM-index</a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://pgm.di.unipi.it">The PGM-index</a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Docs</h4>
+  <ul>
+    
+    <li class="">
+      <a href="/docs/building-the-code/">Building the code</a>
+    </li>
+    
+    <li class="active ">
+      <a href="/docs/cpp-reference/">C&#43;&#43; Reference</a>
+    </li>
+    
+    <li class="">
+      <a href="/docs/tuner/">Using the tuner</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">C&#43;&#43; Reference</h1>
+<div class="content ">
+  
+
+<h1 id="summary">Summary</h1>
+
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>class</code><a href="#class_binary_search_strategy"><code>BinarySearchStrategy</code></a></td>
+<td>An indexing strategy for <a href="#class_p_g_m_index">PGMIndex</a> that stores the segments in a sorted vector and, at query time, performs a binary search on it.</td>
+</tr>
+
+<tr>
+<td><code>class</code><a href="#class_compressed_p_g_m_index"><code>CompressedPGMIndex</code></a></td>
+<td>A space-efficient and compressed index that finds the position of a sought key within a radius of <code>Error</code>.</td>
+</tr>
+
+<tr>
+<td><code>class</code><a href="#class_p_g_m_index"><code>PGMIndex</code></a></td>
+<td>A space-efficient index that finds the position of a sought key within a radius of <code>Error</code>.</td>
+</tr>
+
+<tr>
+<td><code>class</code><a href="#class_recursive_strategy"><code>RecursiveStrategy</code></a></td>
+<td>An indexing strategy for <a href="#class_p_g_m_index">PGMIndex</a> that stores the segment in an index built by repeating the segmentation process until there is only one segment left.</td>
+</tr>
+
+<tr>
+<td><code>class</code><a href="#class_tree_strategy"><code>TreeStrategy</code></a></td>
+<td>An indexing strategy for <a href="#class_p_g_m_index">PGMIndex</a> that stores the segments in an implicit tree.</td>
+</tr>
+
+<tr>
+<td><code>struct</code><a href="#struct_approx_pos"><code>ApproxPos</code></a></td>
+<td>A struct that stores the result of a query to a <a href="#class_p_g_m_index">PGMIndex</a>.</td>
+</tr>
+
+<tr>
+<td><code>struct</code><a href="#struct_segment"><code>Segment</code></a></td>
+<td>A struct that stores a segment.</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="class_binary_search_strategy">class <code>BinarySearchStrategy</code></h1>
+
+<p>An indexing strategy for <a href="#class_p_g_m_index">PGMIndex</a> that stores the segments in a sorted vector and, at query time, performs a binary search on it.</p>
+
+<h2 id="summary-1">Summary</h2>
+
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>public inline const segment_type</code><a href="#class_binary_search_strategy_1adea31a3debfdbec40297225f84b25328"><code>find_segment_for_key</code></a><code>(K key) const</code></td>
+<td>Finds the last-level segment responsible for the given key via a binary search on the array of segments.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_binary_search_strategy_1a4219c4e64af7bcc8ea2c5769f3433843"><code>size_in_bytes</code></a><code>() const</code></td>
+<td>Returns the size of the vector storing the segments in bytes.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_binary_search_strategy_1aa0ab68bf0febe6f5f4509261232678d1"><code>segments_count</code></a><code>() const</code></td>
+<td>Returns the number of segments in the approximate index.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="members">Members</h2>
+
+<h4 id="class_binary_search_strategy_1adea31a3debfdbec40297225f84b25328"><code>public inline const segment_type</code><a href="#class_binary_search_strategy_1adea31a3debfdbec40297225f84b25328"><code>find_segment_for_key</code></a><code>(K key) const</code></h4>
+
+<p>Finds the last-level segment responsible for the given key via a binary search on the array of segments.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><code>key</code> the value to search for</li>
+</ul>
+
+<h4 id="returns">Returns</h4>
+
+<p>the segment responsible for the given key</p>
+
+<h4 id="class_binary_search_strategy_1a4219c4e64af7bcc8ea2c5769f3433843"><code>public inline size_t</code><a href="#class_binary_search_strategy_1a4219c4e64af7bcc8ea2c5769f3433843"><code>size_in_bytes</code></a><code>() const</code></h4>
+
+<p>Returns the size of the vector storing the segments in bytes.</p>
+
+<h4 id="returns-1">Returns</h4>
+
+<p>the size of the vector storing the segments in bytes</p>
+
+<h4 id="class_binary_search_strategy_1aa0ab68bf0febe6f5f4509261232678d1"><code>public inline size_t</code><a href="#class_binary_search_strategy_1aa0ab68bf0febe6f5f4509261232678d1"><code>segments_count</code></a><code>() const</code></h4>
+
+<p>Returns the number of segments in the approximate index.</p>
+
+<h4 id="returns-2">Returns</h4>
+
+<p>the number of segments</p>
+
+<h1 id="class_compressed_p_g_m_index">class <code>CompressedPGMIndex</code></h1>
+
+<p>A space-efficient and compressed index that finds the position of a sought key within a radius of <code>Error</code>.</p>
+
+<h4 id="parameters-1">Parameters</h4>
+
+<ul>
+<li><p><code>K</code> the type of the indexed elements</p></li>
+
+<li><p><code>Error</code> the maximum allowed error in the last level of the index</p></li>
+
+<li><p><code>RecursiveError</code> the maximum allowed error in the upper levels of the index</p></li>
+
+<li><p><code>Floating</code> the floating-point type to use for slopes</p></li>
+
+<li><p><code>CompressedBV</code> the type of the compressed bitvector storing the intercepts</p></li>
+</ul>
+
+<h2 id="summary-2">Summary</h2>
+
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>public inline  explicit</code><a href="#class_compressed_p_g_m_index_1a578fd590379e1ef7f3fc3f89738647a4"><code>CompressedPGMIndex</code></a><code>(std::vector&lt; K &gt; &amp; data)</code></td>
+<td>Builds the compressed index on the given data.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_compressed_p_g_m_index_1abfba774675df8d3b3eb9823154e4fd33"><code>size_in_bytes</code></a><code>() const</code></td>
+<td>Returns the size in bytes of the index.</td>
+</tr>
+
+<tr>
+<td><code>public inline</code><a href="#struct_approx_pos"><code>ApproxPos</code></a><a href="#class_compressed_p_g_m_index_1a147f2663afbcfc991b0e08d89b96fc35"><code>find_approximate_position</code></a><code>(K key) const</code></td>
+<td>Returns the approximate position of a key.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_compressed_p_g_m_index_1ab82c7b9de0c6a6d2324a6976a7e1035c"><code>segments_count</code></a><code>() const</code></td>
+<td>Returns the number of segments in the last level of the index.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_compressed_p_g_m_index_1a01a084e172aa976bd39d93b59fb18e30"><code>height</code></a><code>() const</code></td>
+<td>Returns the height of the index.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="members-1">Members</h2>
+
+<h4 id="class_compressed_p_g_m_index_1a578fd590379e1ef7f3fc3f89738647a4"><code>public inline  explicit</code><a href="#class_compressed_p_g_m_index_1a578fd590379e1ef7f3fc3f89738647a4"><code>CompressedPGMIndex</code></a><code>(std::vector&lt; K &gt; &amp; data)</code></h4>
+
+<p>Builds the compressed index on the given data.</p>
+
+<h4 id="parameters-2">Parameters</h4>
+
+<ul>
+<li><code>data</code> the vector of keys, must be sorted</li>
+</ul>
+
+<h4 id="class_compressed_p_g_m_index_1abfba774675df8d3b3eb9823154e4fd33"><code>public inline size_t</code><a href="#class_compressed_p_g_m_index_1abfba774675df8d3b3eb9823154e4fd33"><code>size_in_bytes</code></a><code>() const</code></h4>
+
+<p>Returns the size in bytes of the index.</p>
+
+<h4 id="returns-3">Returns</h4>
+
+<p>the size in bytes of the index</p>
+
+<h4 id="class_compressed_p_g_m_index_1a147f2663afbcfc991b0e08d89b96fc35"><code>public inline</code><a href="#struct_approx_pos"><code>ApproxPos</code></a><a href="#class_compressed_p_g_m_index_1a147f2663afbcfc991b0e08d89b96fc35"><code>find_approximate_position</code></a><code>(K key) const</code></h4>
+
+<p>Returns the approximate position of a key.</p>
+
+<h4 id="parameters-3">Parameters</h4>
+
+<ul>
+<li><code>key</code> the value to search for</li>
+</ul>
+
+<h4 id="returns-4">Returns</h4>
+
+<p>a struct with the approximate position</p>
+
+<p><strong>See also</strong>: approx_pos_t</p>
+
+<h4 id="class_compressed_p_g_m_index_1ab82c7b9de0c6a6d2324a6976a7e1035c"><code>public inline size_t</code><a href="#class_compressed_p_g_m_index_1ab82c7b9de0c6a6d2324a6976a7e1035c"><code>segments_count</code></a><code>() const</code></h4>
+
+<p>Returns the number of segments in the last level of the index.</p>
+
+<h4 id="returns-5">Returns</h4>
+
+<p>the number of segments</p>
+
+<h4 id="class_compressed_p_g_m_index_1a01a084e172aa976bd39d93b59fb18e30"><code>public inline size_t</code><a href="#class_compressed_p_g_m_index_1a01a084e172aa976bd39d93b59fb18e30"><code>height</code></a><code>() const</code></h4>
+
+<p>Returns the height of the index.</p>
+
+<h4 id="returns-6">Returns</h4>
+
+<p>the height of the index</p>
+
+<h1 id="class_p_g_m_index">class <code>PGMIndex</code></h1>
+<div class="highlight"><pre class="chroma">class PGMIndex
+  : public IndexingStrategy</pre></div>
+<p>A space-efficient index that finds the position of a sought key within a radius of <code>Error</code>.</p>
+
+<p>Internally it uses a piecewise linear mapping from keys to their position in the sorted order. This mapping is represented as a sequence of segment_t, which is itself indexed in one of three ways (collectively referred to as <code>IndexingStrategy</code>): a binary search over the sequence of segments, an implicit multiway tree, a recursive construction of the piecewise linear mapping (the default one). The three choices correspond to <a href="#class_binary_search_strategy">BinarySearchStrategy</a>, <a href="#class_tree_strategy">TreeStrategy</a> and <a href="#class_recursive_strategy">RecursiveStrategy</a>, respectively.</p>
+
+<p>The type aliases <code>BinarySearchBasedPGMIndex</code>, <code>TreeBasedPGMIndex</code> and <code>RecursivePGMIndex</code> are provided for convenience. For example, the following two lines are equivalent:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">PGMIndex</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">RecursiveStrategy</span><span class="o">&lt;</span><span class="n">segmentation_t</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">Error</span><span class="o">&gt;</span><span class="p">,</span> <span class="mi">16</span><span class="o">&gt;&gt;</span> <span class="n">index</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="n">RecursivePGMindex</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">16</span><span class="o">&gt;</span> <span class="n">index</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="parameters-4">Parameters</h4>
+
+<ul>
+<li><p><code>K</code> the type of the indexed elements</p></li>
+
+<li><p><code>Error</code> the maximum allowed error in the last level of the index</p></li>
+
+<li><p><code>IndexingStrategy</code> the strategy that searches the segments indexing the data</p></li>
+
+<li><p><code>Floating</code> the floating-point type to use for slopes and intercept</p></li>
+</ul>
+
+<h2 id="summary-3">Summary</h2>
+
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>public inline  explicit</code><a href="#class_p_g_m_index_1a1831e557be0230032fedc66e5bfbd908"><code>PGMIndex</code></a><code>(const std::vector&lt; K &gt; &amp; data)</code></td>
+<td>Builds the index on the given data.</td>
+</tr>
+
+<tr>
+<td><code>public inline  explicit</code><a href="#class_p_g_m_index_1a7f3d5167b36cae852bb622b4ef5ecb53"><code>PGMIndex</code></a><code>(const std::vector&lt; K &gt; &amp; data,const segmentation_type &amp; segmentation)</code></td>
+<td>Builds the index with a precomputed segmentation.</td>
+</tr>
+
+<tr>
+<td><code>public inline</code><a href="#struct_approx_pos"><code>ApproxPos</code></a><a href="#class_p_g_m_index_1a9fee0fe25ba2b143e185870373b1adfe"><code>find_approximate_position</code></a><code>(K key) const</code></td>
+<td>Returns the approximate position of a key.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="members-2">Members</h2>
+
+<h4 id="class_p_g_m_index_1a1831e557be0230032fedc66e5bfbd908"><code>public inline  explicit</code><a href="#class_p_g_m_index_1a1831e557be0230032fedc66e5bfbd908"><code>PGMIndex</code></a><code>(const std::vector&lt; K &gt; &amp; data)</code></h4>
+
+<p>Builds the index on the given data.</p>
+
+<h4 id="parameters-5">Parameters</h4>
+
+<ul>
+<li><code>data</code> the vector of keys, must be sorted</li>
+</ul>
+
+<h4 id="class_p_g_m_index_1a7f3d5167b36cae852bb622b4ef5ecb53"><code>public inline  explicit</code><a href="#class_p_g_m_index_1a7f3d5167b36cae852bb622b4ef5ecb53"><code>PGMIndex</code></a><code>(const std::vector&lt; K &gt; &amp; data,const segmentation_type &amp; segmentation)</code></h4>
+
+<p>Builds the index with a precomputed segmentation.</p>
+
+<h4 id="parameters-6">Parameters</h4>
+
+<ul>
+<li><p><code>data</code> the vector of keys, must be sorted</p></li>
+
+<li><p><code>segmentation</code> the precomputed segmentation</p></li>
+</ul>
+
+<h4 id="class_p_g_m_index_1a9fee0fe25ba2b143e185870373b1adfe"><code>public inline</code><a href="#struct_approx_pos"><code>ApproxPos</code></a><a href="#class_p_g_m_index_1a9fee0fe25ba2b143e185870373b1adfe"><code>find_approximate_position</code></a><code>(K key) const</code></h4>
+
+<p>Returns the approximate position of a key.</p>
+
+<h4 id="parameters-7">Parameters</h4>
+
+<ul>
+<li><code>key</code> the value to search for</li>
+</ul>
+
+<h4 id="returns-7">Returns</h4>
+
+<p>a struct with the approximate position</p>
+
+<p><strong>See also</strong>: approx_pos_t</p>
+
+<h1 id="class_recursive_strategy">class <code>RecursiveStrategy</code></h1>
+
+<p>An indexing strategy for <a href="#class_p_g_m_index">PGMIndex</a> that stores the segment in an index built by repeating the segmentation process until there is only one segment left.</p>
+
+<h4 id="parameters-8">Parameters</h4>
+
+<ul>
+<li><code>RecursiveError</code> the error of the repeated segmentation</li>
+</ul>
+
+<h2 id="summary-4">Summary</h2>
+
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>public inline const segment_type</code><a href="#class_recursive_strategy_1a57d80f74fd68b3cf43252a43f10c147b"><code>find_segment_for_key</code></a><code>(K key) const</code></td>
+<td>Finds the last-level segment responsible for the given key by searching in the recursive PGM-index structure.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_recursive_strategy_1a8a556b3eab3ffcd87097502ec6529e36"><code>size_in_bytes</code></a><code>() const</code></td>
+<td>Returns the size in bytes of the recursive indexing data structure, including the last-level segments.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_recursive_strategy_1af75be6086baefac4379db8d5c8c724f2"><code>segments_count</code></a><code>() const</code></td>
+<td>Returns the number of segments in the last layer of the approximate index.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_recursive_strategy_1a9158a6256f6ba4f5d3d83616dec9dc3c"><code>height</code></a><code>() const</code></td>
+<td>Returns the number of layers of the recursive segmentation.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="members-3">Members</h2>
+
+<h4 id="class_recursive_strategy_1a57d80f74fd68b3cf43252a43f10c147b"><code>public inline const segment_type</code><a href="#class_recursive_strategy_1a57d80f74fd68b3cf43252a43f10c147b"><code>find_segment_for_key</code></a><code>(K key) const</code></h4>
+
+<p>Finds the last-level segment responsible for the given key by searching in the recursive PGM-index structure.</p>
+
+<h4 id="parameters-9">Parameters</h4>
+
+<ul>
+<li><code>key</code> the value to search for</li>
+</ul>
+
+<h4 id="returns-8">Returns</h4>
+
+<p>the segment responsible for the given key</p>
+
+<h4 id="class_recursive_strategy_1a8a556b3eab3ffcd87097502ec6529e36"><code>public inline size_t</code><a href="#class_recursive_strategy_1a8a556b3eab3ffcd87097502ec6529e36"><code>size_in_bytes</code></a><code>() const</code></h4>
+
+<p>Returns the size in bytes of the recursive indexing data structure, including the last-level segments.</p>
+
+<h4 id="returns-9">Returns</h4>
+
+<p>the size in bytes of the indexing data structure</p>
+
+<h4 id="class_recursive_strategy_1af75be6086baefac4379db8d5c8c724f2"><code>public inline size_t</code><a href="#class_recursive_strategy_1af75be6086baefac4379db8d5c8c724f2"><code>segments_count</code></a><code>() const</code></h4>
+
+<p>Returns the number of segments in the last layer of the approximate index.</p>
+
+<h4 id="returns-10">Returns</h4>
+
+<p>the number of segments</p>
+
+<h4 id="class_recursive_strategy_1a9158a6256f6ba4f5d3d83616dec9dc3c"><code>public inline size_t</code><a href="#class_recursive_strategy_1a9158a6256f6ba4f5d3d83616dec9dc3c"><code>height</code></a><code>() const</code></h4>
+
+<p>Returns the number of layers of the recursive segmentation.</p>
+
+<h4 id="returns-11">Returns</h4>
+
+<p>the number of layers of the recursive segmentation</p>
+
+<h1 id="class_tree_strategy">class <code>TreeStrategy</code></h1>
+
+<p>An indexing strategy for <a href="#class_p_g_m_index">PGMIndex</a> that stores the segments in an implicit tree.</p>
+
+<h4 id="parameters-10">Parameters</h4>
+
+<ul>
+<li><code>NodeSize</code> the size of a node of the tree in bytes</li>
+</ul>
+
+<h2 id="summary-5">Summary</h2>
+
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>public inline const segment_type</code><a href="#class_tree_strategy_1aca4536a255e6613d9eb13897e3fa5b87"><code>find_segment_for_key</code></a><code>(K key) const</code></td>
+<td>Finds the last-level segment responsible for the given key by traversing the tree indexing the keys of the segments.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_tree_strategy_1af4daba9b46f62fcbddd5036638577208"><code>size_in_bytes</code></a><code>() const</code></td>
+<td>Returns the overall size in bytes of the segments and the implicit tree that indexes them.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_tree_strategy_1a7fc0f469aaa324efb1b52856b409cf68"><code>segments_count</code></a><code>() const</code></td>
+<td>Returns the number of segments in the approximate index.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#class_tree_strategy_1aa7574c8f1620bdf061212d1086c3f6e3"><code>height</code></a><code>() const</code></td>
+<td>Returns the height of the tree.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="members-4">Members</h2>
+
+<h4 id="class_tree_strategy_1aca4536a255e6613d9eb13897e3fa5b87"><code>public inline const segment_type</code><a href="#class_tree_strategy_1aca4536a255e6613d9eb13897e3fa5b87"><code>find_segment_for_key</code></a><code>(K key) const</code></h4>
+
+<p>Finds the last-level segment responsible for the given key by traversing the tree indexing the keys of the segments.</p>
+
+<h4 id="parameters-11">Parameters</h4>
+
+<ul>
+<li><code>key</code> the value to search for</li>
+</ul>
+
+<h4 id="returns-12">Returns</h4>
+
+<p>the segment responsible for the given key</p>
+
+<h4 id="class_tree_strategy_1af4daba9b46f62fcbddd5036638577208"><code>public inline size_t</code><a href="#class_tree_strategy_1af4daba9b46f62fcbddd5036638577208"><code>size_in_bytes</code></a><code>() const</code></h4>
+
+<p>Returns the overall size in bytes of the segments and the implicit tree that indexes them.</p>
+
+<h4 id="returns-13">Returns</h4>
+
+<p>the overall size in bytes of the segments and the tree</p>
+
+<h4 id="class_tree_strategy_1a7fc0f469aaa324efb1b52856b409cf68"><code>public inline size_t</code><a href="#class_tree_strategy_1a7fc0f469aaa324efb1b52856b409cf68"><code>segments_count</code></a><code>() const</code></h4>
+
+<p>Returns the number of segments in the approximate index.</p>
+
+<h4 id="returns-14">Returns</h4>
+
+<p>the number of segments</p>
+
+<h4 id="class_tree_strategy_1aa7574c8f1620bdf061212d1086c3f6e3"><code>public inline size_t</code><a href="#class_tree_strategy_1aa7574c8f1620bdf061212d1086c3f6e3"><code>height</code></a><code>() const</code></h4>
+
+<p>Returns the height of the tree.</p>
+
+<h4 id="returns-15">Returns</h4>
+
+<p>the height of the tree</p>
+
+<h1 id="struct_approx_pos">struct <code>ApproxPos</code></h1>
+
+<p>A struct that stores the result of a query to a <a href="#class_p_g_m_index">PGMIndex</a>.</p>
+
+<h2 id="summary-6">Summary</h2>
+
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>public size_t</code><a href="#struct_approx_pos_1a15681ae7f380b336075fba2e0b98f242"><code>pos</code></a></td>
+<td>The approximate position.</td>
+</tr>
+
+<tr>
+<td><code>public size_t</code><a href="#struct_approx_pos_1af3d4ed396da31ddd03e38c3ec39e6d97"><code>lo</code></a></td>
+<td>The lower bound of the range of size no more than 2*error where key can be found.</td>
+</tr>
+
+<tr>
+<td><code>public size_t</code><a href="#struct_approx_pos_1a5ae679748ce64d7bd20ced8294aa7e38"><code>hi</code></a></td>
+<td>The upper bound of the range of size no more than 2*error where key can be found.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="members-5">Members</h2>
+
+<h4 id="struct_approx_pos_1a15681ae7f380b336075fba2e0b98f242"><code>public size_t</code><a href="#struct_approx_pos_1a15681ae7f380b336075fba2e0b98f242"><code>pos</code></a></h4>
+
+<p>The approximate position.</p>
+
+<h4 id="struct_approx_pos_1af3d4ed396da31ddd03e38c3ec39e6d97"><code>public size_t</code><a href="#struct_approx_pos_1af3d4ed396da31ddd03e38c3ec39e6d97"><code>lo</code></a></h4>
+
+<p>The lower bound of the range of size no more than 2*error where key can be found.</p>
+
+<h4 id="struct_approx_pos_1a5ae679748ce64d7bd20ced8294aa7e38"><code>public size_t</code><a href="#struct_approx_pos_1a5ae679748ce64d7bd20ced8294aa7e38"><code>hi</code></a></h4>
+
+<p>The upper bound of the range of size no more than 2*error where key can be found.</p>
+
+<h1 id="struct_segment">struct <code>Segment</code></h1>
+
+<p>A struct that stores a segment.</p>
+
+<h4 id="parameters-12">Parameters</h4>
+
+<ul>
+<li><p><code>K</code> the type of the elements that the segment indexes</p></li>
+
+<li><p><code>Floating</code> the floating-point type of the segment&rsquo;s parameters</p></li>
+</ul>
+
+<h2 id="summary-7">Summary</h2>
+
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>public K</code><a href="#struct_segment_1ab65f082b009e4e700041057b2bb4774b"><code>key</code></a></td>
+<td>The first key that the segment indexes.</td>
+</tr>
+
+<tr>
+<td><code>public Floating</code><a href="#struct_segment_1ad0d0a912906477fbee00fc854267e764"><code>slope</code></a></td>
+<td>The slope of the segment.</td>
+</tr>
+
+<tr>
+<td><code>public Floating</code><a href="#struct_segment_1acac5e665fd93764a2c9e37230503a9d1"><code>intercept</code></a></td>
+<td>The intercept of the segment.</td>
+</tr>
+
+<tr>
+<td><code>public</code><a href="#struct_segment_1a82c82f1b3212ab87f3dde715e7844fc0"><code>Segment</code></a><code>() = default</code></td>
+<td></td>
+</tr>
+
+<tr>
+<td><code>public inline</code><a href="#struct_segment_1ac0ce510d579be31439a54e672251af8e"><code>Segment</code></a><code>(K key,Floating slope,Floating intercept)</code></td>
+<td>Constructs a new segment.</td>
+</tr>
+
+<tr>
+<td><code>public inline size_t</code><a href="#struct_segment_1a16df1ea4af661caed457900f184a8e0b"><code>operator()</code></a><code>(K k) const</code></td>
+<td>Returns the approximate position of the specified key.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="members-6">Members</h2>
+
+<h4 id="struct_segment_1ab65f082b009e4e700041057b2bb4774b"><code>public K</code><a href="#struct_segment_1ab65f082b009e4e700041057b2bb4774b"><code>key</code></a></h4>
+
+<p>The first key that the segment indexes.</p>
+
+<h4 id="struct_segment_1ad0d0a912906477fbee00fc854267e764"><code>public Floating</code><a href="#struct_segment_1ad0d0a912906477fbee00fc854267e764"><code>slope</code></a></h4>
+
+<p>The slope of the segment.</p>
+
+<h4 id="struct_segment_1acac5e665fd93764a2c9e37230503a9d1"><code>public Floating</code><a href="#struct_segment_1acac5e665fd93764a2c9e37230503a9d1"><code>intercept</code></a></h4>
+
+<p>The intercept of the segment.</p>
+
+<h4 id="struct_segment_1a82c82f1b3212ab87f3dde715e7844fc0"><code>public</code><a href="#struct_segment_1a82c82f1b3212ab87f3dde715e7844fc0"><code>Segment</code></a><code>() = default</code></h4>
+
+<h4 id="struct_segment_1ac0ce510d579be31439a54e672251af8e"><code>public inline</code><a href="#struct_segment_1ac0ce510d579be31439a54e672251af8e"><code>Segment</code></a><code>(K key,Floating slope,Floating intercept)</code></h4>
+
+<p>Constructs a new segment.</p>
+
+<h4 id="parameters-13">Parameters</h4>
+
+<ul>
+<li><p><code>key</code> the first key that the segment indexes</p></li>
+
+<li><p><code>slope</code> the slope of the segment</p></li>
+
+<li><p><code>intercept</code> the intercept of the segment</p></li>
+</ul>
+
+<h4 id="struct_segment_1a16df1ea4af661caed457900f184a8e0b"><code>public inline size_t</code><a href="#struct_segment_1a16df1ea4af661caed457900f184a8e0b"><code>operator()</code></a><code>(K k) const</code></h4>
+
+<p>Returns the approximate position of the specified key.</p>
+
+<h4 id="parameters-14">Parameters</h4>
+
+<ul>
+<li><code>k</code> the key whose position must be approximated</li>
+</ul>
+
+<h4 id="returns-16">Returns</h4>
+
+<p>the approximate position of the specified key</p>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="footer">
+  Made with 👼 at <a href="https://www.di.unipi.it/en/">University of Pisa</a> by the <a href="http://acube.di.unipi.it">A³ Lab</a>
+</div>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.1237ff71925bb8625c97a9af8db4c54525258bedfd7c47493daaff723bea755e.js"></script>
+  
+
+  
+  
+  
+    
+  
+
+
+</body>
+
+</html>
